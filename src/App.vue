@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h2>第一次更改</h2>
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>

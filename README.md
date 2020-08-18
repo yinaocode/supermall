@@ -1,16 +1,11 @@
-# supermall
 
 ## Project setup
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
 ```
 npm run build
 ```
@@ -19,6 +14,13 @@ npm run build
 ```
 npm run lint
 ```
-
+### git
+```
+git init
+git add README
+git commit -m 'first commot'
+git remote add origin http://github.com/mm.git
+git push -u origin master
+```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
