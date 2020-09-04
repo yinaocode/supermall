@@ -19,7 +19,7 @@ npm run lint
 git init
 git add README
 git commit -m 'first commot'
-git remote add origin http://github.com/mm.git
+git remote add origin 'https://github.com/yinaocode/supermall.git'
 git push -u origin master
 ```
 ### Customize configuration
