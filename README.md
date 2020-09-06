@@ -21,6 +21,8 @@ git add README
 git commit -m 'first commot'
 git remote add origin 'https://github.com/yinaocode/supermall.git'
 git push -u origin master
+git checkout -b *** 创建分支
+git branch  查看当前分支
 ```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
