@@ -58,8 +58,10 @@ export default {
       this.$refs.loginFromRef.validate(async valid=>{
         if(!valid) return false;
      const {data:res} = await  this.$http.post('login',this.loginFrom);
-        if(!res.meta.code===200)return console.log("登录失败");
-        console.log("登陆成功");
+        if(res.meta.status!==200)return this.$message.error('登录失败');
+       this.$message({message: '登录成功',type: 'success'})
+        window.sessionStorage.setItem('token',res.data.token)
+        this.$router.push('/home')
       })
     }
   }
