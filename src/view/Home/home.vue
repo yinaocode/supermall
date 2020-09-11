@@ -11,20 +11,24 @@
 <!-- 页面主题 -->
   <el-container>
     <!-- 侧边栏 -->
-    <el-aside width="200px">
+    <el-aside :width="isCollapse ? '64px' :'200px'">
+      <div class="toggle-button" @click="toggleCollapse">|||</div>
        <!-- 侧边栏菜单区 -->
        <el-menu   
       background-color="#333744"
+      :unique-opened = 'true'
+      :collapse="isCollapse"
+      :collapse-transition = "false"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#409eff">
      <!-- 一级菜单 -->
-      <el-submenu :index="index" v-for="(item,index) in menusList" :key="index">
+      <el-submenu :index="item.id+''" v-for="item in menusList" :key="item.id">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i :class='iconObj[item.id]' ></i>
           <span>{{item.authName}}</span>
         </template>
         <!-- 二级菜单 -->
-        <el-menu-item :index="subIndex" v-for="(subItem,subIndex) in item.children" :key="subIndex">
+        <el-menu-item :index="subItem.id+''" v-for="subItem in item.children" :key="subItem.id">
           <template slot="title">
             <i class="el-icon-location"></i>
             <span>{{subItem.authName}}</span>
@@ -34,7 +38,9 @@
     </el-menu>
     </el-aside>
     <!-- 内容 -->
-    <el-main>Main</el-main>
+    <el-main>
+      <router-view></router-view>
+    </el-main>
   </el-container>
 </el-container>
 </template>
@@ -43,7 +49,15 @@
 export default {
   data(){
     return {
-      menusList:[]
+      menusList:[],
+      iconObj:{
+        '125':'el-icon-user-solid',
+        '103':'el-icon-key',
+        '101':'el-icon-s-goods',
+        '102':'el-icon-s-order',
+        '145':'el-icon-date',
+      },
+      isCollapse:false
     }
   },
   created(){
@@ -58,6 +72,10 @@ methods:{
    const  {data:res} = await this.$http.get('menus')
    if(res.meta.status!==200) return this.$message.error(res.data.msg)
     this.menusList = res.data
+    },
+    // 点击按钮折叠和展开菜单
+    toggleCollapse(){
+      this.isCollapse = !this.isCollapse
     }
 }
 }
@@ -91,8 +109,20 @@ methods:{
 }
 .el-aside{
 background-color:#333744 ;
+.el-menu{
+  border:none;
+}
 }
 .el-main{
   background-color: #eaedf1;
+}
+.toggle-button{
+  background-color: #4a5064;
+  color: #fff;
+  font-size: 10px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  cursor: pointer;
 }
 </style>
