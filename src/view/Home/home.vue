@@ -18,6 +18,8 @@
       background-color="#333744"
       :unique-opened = 'true'
       :collapse="isCollapse"
+      :router='true'
+      :default-active ="activePaths"
       :collapse-transition = "false"
       text-color="#fff"
       active-text-color="#409eff">
@@ -28,7 +30,8 @@
           <span>{{item.authName}}</span>
         </template>
         <!-- 二级菜单 -->
-        <el-menu-item :index="subItem.id+''" v-for="subItem in item.children" :key="subItem.id">
+        <el-menu-item :index="'/'+subItem.path+''" v-for="subItem in item.children" 
+        :key="subItem.id" @click="saveNavState('/'+subItem.path)">
           <template slot="title">
             <i class="el-icon-location"></i>
             <span>{{subItem.authName}}</span>
@@ -57,11 +60,13 @@ export default {
         '102':'el-icon-s-order',
         '145':'el-icon-date',
       },
-      isCollapse:false
+      isCollapse:false,//
+      activePaths:''//激活的链接
     }
   },
   created(){
-    this.getMenuList()
+    this.getMenuList();
+    this.activePaths = window.sessionStorage.getItem("saveNavState")
   },
 methods:{
     loginOut(){
@@ -76,6 +81,11 @@ methods:{
     // 点击按钮折叠和展开菜单
     toggleCollapse(){
       this.isCollapse = !this.isCollapse
+    },
+    // 保存激活的链接
+    saveNavState(index){
+      window.sessionStorage.setItem('saveNavState',index)
+      this.activePaths = index
     }
 }
 }

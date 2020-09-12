@@ -5,6 +5,7 @@ import Login from '../view/login/login'
 import Home from '../view/Home/home'
 // import weCome from '../view/Home/welCome'
 const weCome  = ()=>import('../view/Home/welCome') 
+const user  = ()=>import('../view/User/user') 
 var routes = [
     {
         path:'/',
@@ -23,6 +24,9 @@ var routes = [
             {
              path:'/weCome',
              component:weCome
+            },{
+                path:'/users',
+                component:user
             }
         ]
     }
