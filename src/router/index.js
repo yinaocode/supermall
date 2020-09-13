@@ -19,7 +19,7 @@ var routes = [
         path:'/home',
         component:Home,
         name:'Home',
-        redirect:'/weCome',
+        redirect:'/users',
         children:[
             {
              path:'/weCome',

@@ -33,7 +33,7 @@
         <el-menu-item :index="'/'+subItem.path+''" v-for="subItem in item.children" 
         :key="subItem.id" @click="saveNavState('/'+subItem.path)">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-menu"></i>
             <span>{{subItem.authName}}</span>
           </template>
         </el-menu-item>
