@@ -6,6 +6,8 @@ import Home from '../view/Home/home'
 // import weCome from '../view/Home/welCome'
 const weCome  = ()=>import('../view/Home/welCome') 
 const user  = ()=>import('../view/User/user') 
+const rights = ()=>import('../view/Power/power') 
+const roules = ()=>import('../view/Power/roules') 
 var routes = [
     {
         path:'/',
@@ -27,9 +29,17 @@ var routes = [
             },{
                 path:'/users',
                 component:user
+            },{
+                path:'/rights',
+                component:rights
+                
+            },{
+                path:'/roles',
+                component:roules
+                
             }
         ]
-    }
+    },
 ]
 var router = new VueRouter({
     routes,
