@@ -8,6 +8,7 @@ const weCome  = ()=>import('../view/Home/welCome')
 const user  = ()=>import('../view/User/user') 
 const rights = ()=>import('../view/Power/power') 
 const roules = ()=>import('../view/Power/roules') 
+const goods = ()=>import('../view/Goods/goods') 
 var routes = [
     {
         path:'/',
@@ -36,6 +37,10 @@ var routes = [
             },{
                 path:'/roles',
                 component:roules
+                
+            },{
+                path:'/categories',
+                component:goods
                 
             }
         ]
