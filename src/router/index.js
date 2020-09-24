@@ -9,6 +9,7 @@ const user  = ()=>import('../view/User/user')
 const rights = ()=>import('../view/Power/power') 
 const roules = ()=>import('../view/Power/roules') 
 const goods = ()=>import('../view/Goods/goods') 
+const params = ()=>import('../view/Goods/params') 
 var routes = [
     {
         path:'/',
@@ -33,14 +34,16 @@ var routes = [
             },{
                 path:'/rights',
                 component:rights
-                
             },{
                 path:'/roles',
                 component:roules
-                
             },{
                 path:'/categories',
                 component:goods
+            }
+            ,{
+                path:'/params',
+                component:params
                 
             }
         ]
