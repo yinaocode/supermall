@@ -53,7 +53,8 @@
                   v-for="(item, index) in scope.row.attr_vals"
                   :key="index"
                   closable
-                  >{{ item }}</el-tag
+                  @close="handleCloseTag(index,scope.row)"
+                  >{{ item}}</el-tag
                 >
                 <!-- 输入文本框 -->
                 <el-input
@@ -113,7 +114,36 @@
           <!-- 静态属性表格 -->
           <el-table :data="onlyTabData" border stripe="">
             <!-- 展开行 -->
-            <el-table-column type="expand"></el-table-column>
+           <el-table-column type="expand">
+              <template slot-scope="scope">
+                <el-tag
+                  v-for="(item, index) in scope.row.attr_vals"
+                  :key="index"
+                  closable
+                  @close="handleCloseTag(index,scope.row)"
+                  >{{ item}}</el-tag
+                >
+                <!-- 输入文本框 -->
+                <el-input
+                  class="input-new-tag"
+                  v-if="scope.row.inputVisible"
+                  v-model="scope.row.inputValue"
+                  ref="saveTagInput"
+                  size="small"
+                  @keyup.enter.native="handleInputConfirm(scope.row)"
+                  @blur="handleInputConfirm(scope.row)"
+                >
+                </el-input>
+                <!-- 添加按钮 -->
+                <el-button
+                  v-else
+                  class="button-new-tag"
+                  size="small"
+                  @click="showInput(scope.row)"
+                  >+ New Tag</el-button
+                >
+              </template>
+            </el-table-column>
             <el-table-column type="index"></el-table-column>
             <el-table-column
               label="属性名称"
@@ -278,6 +308,8 @@ export default {
     async getParamsDate() {
       if (this.selectCateKeys.length !== 3) {
         this.selectCateKeys = [];
+        this.manyTabData = [];
+        this.onlyTabData = [];
         return;
       }
       const {
@@ -288,8 +320,8 @@ export default {
       if (res.meta.status !== 200)
         return this.$message.error("获取参数列表失败");
       res.data.forEach((item) => {
-        item.attr_vals = item.attr_vals == " " ? item.attr_vals.split(" ") : [];
-        //  控制文本框的显示与隐藏
+        item.attr_vals = item.attr_vals != "" ? item.attr_vals.split(" ") : [];
+       //  控制文本框的显示与隐藏
         item.inputVisible = false;
         item.inputValue = "";
       });
@@ -375,16 +407,21 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error("删除参数失败");
       }
-      this.$message.success("删除参数失败");
+      this.$message.success("删除参数成功");
       this.getParamsDate();
     },
     // 文本框失去焦点或者按下enter键
-    handleInputConfirm(row) {
+  async  handleInputConfirm(row) {
       if (row.inputValue.trim().length === 0) {
         row.inputValue = "";
         row.inputVisible = false;
         return;
       }
+      row.attr_vals.push(row.inputValue.trim())
+     row.inputValue = '';
+     row.inputVisible = false;
+    //  把添加的tag上传
+    this.saveAttrVals(row)
     },
     // 点击按钮，展示本文框
     showInput(row) {
@@ -393,6 +430,24 @@ export default {
         this.$refs.saveTagInput.$refs.input.focus();
       });
     },
+  async saveAttrVals(row){
+ const { data: res } = await this.$http.put(
+        `categories/${this.cateId}/attributes/${row.attr_id}`,
+        { attr_name: row.attr_name,
+            attr_sel: this.activeName,
+            attr_vals: row.attr_vals.join(" "),
+            }
+      );
+      if (res.meta.status !== 200) {
+        return this.$message.error("修改参数失败");
+      }
+      this.$message.success("修改参数成功");
+    },
+    // 删除属性的参数
+    handleCloseTag(index,row){
+      row.attr_vals.splice(index,1);
+       this.saveAttrVals(row)
+    }
   },
 };
 </script>
@@ -403,5 +458,11 @@ export default {
 }
 .input-new-tag {
   width: 120px;
+}
+.el-cascader{
+  margin-left: 15px;
+}
+.el-tag{
+margin: 0 5px;
 }
 </style>
