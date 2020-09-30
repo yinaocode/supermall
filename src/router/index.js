@@ -10,6 +10,7 @@ const rights = ()=>import('../view/Power/power')
 const roules = ()=>import('../view/Power/roules') 
 const goods = ()=>import('../view/Goods/goods') 
 const params = ()=>import('../view/Goods/params') 
+const list = ()=>import('../view/Goods/list') 
 var routes = [
     {
         path:'/',
@@ -44,6 +45,11 @@ var routes = [
             ,{
                 path:'/params',
                 component:params
+                
+            }
+            ,{
+                path:'/goods',
+                component:list
                 
             }
         ]
