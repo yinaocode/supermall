@@ -11,6 +11,7 @@ const roules = ()=>import('../view/Power/roules')
 const goods = ()=>import('../view/Goods/goods') 
 const params = ()=>import('../view/Goods/params') 
 const list = ()=>import('../view/Goods/list') 
+const Add = ()=>import('../view/Goods/Add') 
 var routes = [
     {
         path:'/',
@@ -45,13 +46,16 @@ var routes = [
             ,{
                 path:'/params',
                 component:params
-                
             }
             ,{
                 path:'/goods',
-                component:list
+                component:list,
                 
-            }
+            } ,{
+                path:'/goods/add',
+                component:Add
+                
+            } 
         ]
     },
 ]

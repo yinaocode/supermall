@@ -4,6 +4,11 @@ import router from './router/index.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI)
+// 导入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
 // 导入全局样式
 import './assets/css/global.css'
 import axios from 'axios'
@@ -14,6 +19,8 @@ axios.interceptors.request.use(config=>{
   return config
 })
 Vue.config.productionTip = false
+// 注册富文本编辑器
+Vue.use(VueQuillEditor, /* { default global options } */)
 Vue.filter('dateFormat',function(originVal){
  const dt = new Date(originVal*1000)
  const y = dt.getFullYear()
