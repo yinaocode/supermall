@@ -12,6 +12,7 @@ const goods = ()=>import('../view/Goods/goods')
 const params = ()=>import('../view/Goods/params') 
 const list = ()=>import('../view/Goods/list') 
 const Add = ()=>import('../view/Goods/Add') 
+const order = ()=>import('../view/Order/order') 
 var routes = [
     {
         path:'/',
@@ -54,8 +55,11 @@ var routes = [
             } ,{
                 path:'/goods/add',
                 component:Add
-                
-            } 
+            } ,{
+                path:'/orders',
+                component:order,
+                name:'order'
+            }
         ]
     },
 ]
