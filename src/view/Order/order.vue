@@ -176,7 +176,7 @@ export default {
     const {data:res} = await    this.$http.get('/kuaidi/804909574412544580')
         if(res.meta.status!==200) return this.$message.error('获取物流信息失败')
        this.localList = res.data;
-       this.localdialogVisible = true;
+       this.localdiVisible = true;
     }
   },
 };

@@ -13,6 +13,7 @@ const params = ()=>import('../view/Goods/params')
 const list = ()=>import('../view/Goods/list') 
 const Add = ()=>import('../view/Goods/Add') 
 const order = ()=>import('../view/Order/order') 
+const report = ()=>import('../view/Report/report') 
 var routes = [
     {
         path:'/',
@@ -59,6 +60,10 @@ var routes = [
                 path:'/orders',
                 component:order,
                 name:'order'
+            } ,{
+                path:'/reports',
+                component:report,
+                name:'report'
             }
         ]
     },
