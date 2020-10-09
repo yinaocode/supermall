@@ -11,11 +11,22 @@ import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
 // 导入全局样式
 import './assets/css/global.css'
+
+// 导入进度条包Nprogress的js和css
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 import axios from 'axios'
 axios.defaults.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'
 Vue.prototype.$http = axios;
+// 在request拦截器，展示进度条
 axios.interceptors.request.use(config=>{
+  Nprogress.start()
   config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
+// 在response拦截器中，关闭进度条
+axios.interceptors.response.use(config=>{
+  Nprogress.done()
   return config
 })
 Vue.config.productionTip = false

@@ -9,7 +9,7 @@
     <!-- 卡片视图 -->
     <el-card>
       <!-- 搜索与添加区 -->
-      <el-row :gutter="20">
+      <el-row :gutter="30">
         <el-col :span="7">
           <el-input placeholder="请输入内容" 
           v-model="queryInfo.query" 
@@ -56,7 +56,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryInfo.pagenum"
-        :page-sizes="[5, 10, 20, 50]"
+        :page-sizes="[5, 10, 30, 50]"
         :page-size="queryInfo.pagesize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
